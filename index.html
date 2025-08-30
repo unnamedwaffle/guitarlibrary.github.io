@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎸 The Ulitmate Guitar Chord Library</title>
+    <title>🎸 The Ultimate Guitar Chord Library</title>
     <style>
         /* --- Basic Setup & Typography --- */
         :root {
@@ -2718,7 +2718,7 @@
                     <p>Practice reading single notes. Click the correct fret number for each highlighted note.</p>
                     
                     <div class="tab-staff" id="exercise-1-staff">
-                        <div class="tab-lines">
+                        <div class="tab-lines" style="position: relative; height: 240px;">
                             <div class="tab-labels">
                                 <span>E</span>
                                 <span>B</span>
@@ -2727,13 +2727,28 @@
                                 <span>A</span>
                                 <span>E</span>
                             </div>
-                            <div class="tab-line"></div>
-                            <div class="tab-line"></div>
-                            <div class="tab-line"></div>
-                            <div class="tab-line"></div>
-                            <div class="tab-line"></div>
-                            <div class="tab-line"></div>
-                            <div class="tab-note highlighted" style="left: 150px; top: 99px;" data-answer="2">?</div>
+                            <!-- String lines that extend across the full width -->
+                            <div class="tab-line" style="left: 0; right: 0; width: 100%;"></div>
+                            <div class="tab-line" style="left: 0; right: 0; width: 100%;"></div>
+                            <div class="tab-line" style="left: 0; right: 0; width: 100%;"></div>
+                            <div class="tab-line" style="left: 0; right: 0; width: 100%;"></div>
+                            <div class="tab-line" style="left: 0; right: 0; width: 100%;"></div>
+                            <div class="tab-line" style="left: 0; right: 0; width: 100%;"></div>
+                            <!-- Vertical fret lines -->
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 15%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 30%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 45%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 60%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 75%; border-radius: 1px;"></div>
+                            <!-- Add fret numbers -->
+                            <div class="fret-numbers" style="position: absolute; left: 0; bottom: -25px; display: flex; color: var(--secondary-color); font-size: 0.9rem; font-weight: bold; width: 100%;">
+                                <span style="position: absolute; left: 7.5%;">1</span>
+                                <span style="position: absolute; left: 22.5%;">2</span>
+                                <span style="position: absolute; left: 37.5%;">3</span>
+                                <span style="position: absolute; left: 52.5%;">4</span>
+                                <span style="position: absolute; left: 67.5%;">5</span>
+                            </div>
+                            <div class="tab-note highlighted" style="left: 22.5%; top: 99px;" data-answer="2">?</div>
                         </div>
                     </div>
                     
@@ -2759,7 +2774,7 @@
                     <p>Identify the chord shown in tablature format.</p>
                     
                     <div class="tab-staff" id="exercise-2-staff">
-                        <div class="tab-lines">
+                        <div class="tab-lines" style="position: relative; height: 200px;">
                             <div class="tab-labels">
                                 <span>E</span>
                                 <span>B</span>
