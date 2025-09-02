@@ -2816,7 +2816,7 @@
                     <p>Practice reading single notes. Click the correct fret number for each highlighted note.</p>
                     
                     <div class="tab-staff" id="exercise-1-staff">
-                        <div class="tab-lines" style="position: relative; height: 240px;">
+                        <div class="tab-lines" style="position: relative; height: 240px; overflow-x: auto;">
                             <div class="tab-labels">
                                 <span>E</span>
                                 <span>B</span>
@@ -2832,21 +2832,35 @@
                             <div class="tab-line" style="left: 0; right: 0; width: 100%;"></div>
                             <div class="tab-line" style="left: 0; right: 0; width: 100%;"></div>
                             <div class="tab-line" style="left: 0; right: 0; width: 100%;"></div>
-                            <!-- Vertical fret lines -->
-                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 15%; border-radius: 1px;"></div>
-                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 30%; border-radius: 1px;"></div>
-                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 45%; border-radius: 1px;"></div>
-                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 60%; border-radius: 1px;"></div>
-                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 75%; border-radius: 1px;"></div>
-                            <!-- Add fret numbers -->
-                            <div class="fret-numbers" style="position: absolute; left: 0; bottom: -25px; display: flex; color: var(--secondary-color); font-size: 0.9rem; font-weight: bold; width: 100%;">
-                                <span style="position: absolute; left: 7.5%;">1</span>
-                                <span style="position: absolute; left: 22.5%;">2</span>
-                                <span style="position: absolute; left: 37.5%;">3</span>
-                                <span style="position: absolute; left: 52.5%;">4</span>
-                                <span style="position: absolute; left: 67.5%;">5</span>
+                            <!-- Vertical fret lines for frets 1-12 -->
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 8%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 16%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 24%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 32%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 40%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 48%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 56%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 64%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 72%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 80%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 88%; border-radius: 1px;"></div>
+                            <div class="fret-line" style="position: absolute; top: 0; bottom: 0; width: 2px; height: 100%; background: var(--fret-color); left: 96%; border-radius: 1px;"></div>
+                            <!-- Add fret numbers for frets 1-12 -->
+                            <div class="fret-numbers" style="position: absolute; left: 0; bottom: -25px; display: flex; color: var(--secondary-color); font-size: 0.8rem; font-weight: bold; width: 100%;">
+                                <span style="position: absolute; left: 4%;">1</span>
+                                <span style="position: absolute; left: 12%;">2</span>
+                                <span style="position: absolute; left: 20%;">3</span>
+                                <span style="position: absolute; left: 28%;">4</span>
+                                <span style="position: absolute; left: 36%;">5</span>
+                                <span style="position: absolute; left: 44%;">6</span>
+                                <span style="position: absolute; left: 52%;">7</span>
+                                <span style="position: absolute; left: 60%;">8</span>
+                                <span style="position: absolute; left: 68%;">9</span>
+                                <span style="position: absolute; left: 76%;">10</span>
+                                <span style="position: absolute; left: 84%;">11</span>
+                                <span style="position: absolute; left: 92%;">12</span>
                             </div>
-                            <div class="tab-note highlighted" style="left: 22.5%; top: 99px;" data-answer="2">?</div>
+                            <div class="tab-note highlighted" id="exercise-note" style="left: 20%; top: 99px;" data-answer="3">3</div>
                         </div>
                     </div>
                     
@@ -5034,11 +5048,20 @@
                 const randomExercise = exerciseData.exercise1[Math.floor(Math.random() * exerciseData.exercise1.length)];
                 exerciseAnswers.exercise1.correct = randomExercise.answer;
                 
+                // Calculate horizontal position based on fret number
+                function getFretPosition(fret) {
+                    const fretNumber = parseInt(fret);
+                    if (fretNumber === 0) return 2; // Open string position (near left edge)
+                    // For frets 1-12, position between fret lines (4% start + 8% spacing per fret)
+                    return 4 + (fretNumber - 1) * 8; // Position in center of fret space
+                }
+                
                 // Update the tab note position and text
-                const tabNote = document.querySelector('#exercise-1-staff .tab-note');
+                const tabNote = document.querySelector('#exercise-1-staff .tab-note') || document.getElementById('exercise-note');
                 if (tabNote) {
                     tabNote.style.top = randomExercise.string + 'px';
-                    tabNote.textContent = randomExercise.fret; // Show the actual fret number
+                    tabNote.style.left = getFretPosition(randomExercise.fret) + '%';
+                    tabNote.textContent = ''; // Hide the fret number - student must identify it
                     tabNote.dataset.answer = randomExercise.answer;
                     tabNote.classList.add('highlighted'); // Make it stand out
                 }
