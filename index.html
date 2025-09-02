@@ -253,6 +253,90 @@
             border-color: var(--primary-color);
             box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.25);
         }
+        
+        /* --- Search Bar Styles --- */
+        .search-container {
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .search-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            max-width: 500px;
+            width: 100%;
+            background: var(--card-gradient);
+            border-radius: 25px;
+            box-shadow: 0 8px 32px var(--shadow-color);
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .search-input-wrapper:hover,
+        .search-input-wrapper:focus-within {
+            border-color: var(--primary-color);
+            box-shadow: 0 12px 40px var(--shadow-color);
+            transform: translateY(-2px);
+        }
+        
+        .search-icon {
+            padding: 0 1rem;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 1rem 0.5rem;
+            font-size: 1rem;
+            color: var(--text-color);
+            outline: none;
+            min-width: 0;
+        }
+        
+        .search-input::placeholder {
+            color: var(--secondary-color);
+        }
+        
+        .search-clear {
+            background: transparent;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            display: none;
+        }
+        
+        .search-clear:hover {
+            background: var(--border-color);
+            color: var(--text-color);
+        }
+        
+        .search-clear.visible {
+            display: block;
+        }
+        
+        .search-results-count {
+            background: var(--card-bg);
+            padding: 0.75rem 1.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
         /* --- Shared Chord Diagram Styles --- */
         #chord-display, .chord-guide-display {
             display: flex;
@@ -2180,6 +2264,8 @@
             .song-chord-display .chord-diagram { width: 180px; }
             .chord-diagram-wrapper { padding: 2rem; min-height: 360px; }
             .song-chord-display .chord-diagram-wrapper { padding: 1.5rem; min-height: 300px; }
+            .search-container { margin-bottom: 2rem; }
+            .search-input-wrapper { max-width: 100%; }
         }
     </style>
 </head>
@@ -2226,6 +2312,18 @@
         <div id="songs-page" class="page">
             <h2 class="page-title">🎤 Popular Song Chords</h2>
             <p class="page-subtitle">🎶 Learn to play famous songs with these simple chord progressions 🎶</p>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="song-search" class="search-input" placeholder="Search songs by title, artist, or chords..." />
+                    <button class="search-clear" id="search-clear">✕</button>
+                </div>
+                <div class="search-results-count" id="search-results-count">
+                    <span id="results-text">Showing all songs</span>
+                </div>
+            </div>
             
             <div class="song-list" id="song-list">
                 <!-- Song cards will be generated here -->
@@ -3113,8 +3211,23 @@
                 // { title: "New Song", artist: "Artist Name", chords: ["C", "G", "Am", "F"] },
             ];
 
-            // --- STRUMMING PATTERNS DATA ---
+            // --- ⭐ EASY-TO-EDIT STRUMMING PATTERNS SECTION ⭐ ---
+            // 📝 TO ADD NEW STRUMMING PATTERNS, ADD THEM TO THIS ARRAY:
+            // Copy the template below and replace with your pattern information
+            /*
+            TEMPLATE FOR ADDING NEW PATTERNS:
+            {
+                name: "Pattern Name",
+                pattern: "D - D U - U D U",  // D=Down, U=Up, X=Muted, -=Rest
+                timeSignature: "4/4",        // Time signature (4/4, 3/4, 6/8)
+                difficulty: "beginner",      // beginner, intermediate, or advanced
+                description: "Description of the pattern and when to use it",
+                genre: "Genre or style this pattern works with"
+            },
+            */
+            
             const strummingPatterns = [
+                // BEGINNER PATTERNS 🌱
                 {
                     name: "Basic Down",
                     pattern: "D - D - D - D -",
@@ -3163,6 +3276,8 @@
                     description: "Slow, emotional pattern for ballads.",
                     genre: "Ballad, Folk"
                 },
+                
+                // INTERMEDIATE PATTERNS 🎸
                 {
                     name: "Island Rhythm",
                     pattern: "D - D U - U - U",
@@ -3228,6 +3343,32 @@
                     genre: "Blues, Country"
                 },
                 {
+                    name: "Waltz Up",
+                    pattern: "D U U D U U D U U",
+                    timeSignature: "3/4",
+                    difficulty: "intermediate",
+                    description: "Flowing waltz with upstrokes.",
+                    genre: "Folk, Country"
+                },
+                {
+                    name: "6/8 Folk",
+                    pattern: "D - - D - U D - - D - U",
+                    timeSignature: "6/8",
+                    difficulty: "intermediate",
+                    description: "Compound time folk pattern.",
+                    genre: "Folk, Celtic"
+                },
+                {
+                    name: "Calypso",
+                    pattern: "D - D U - U D -",
+                    timeSignature: "4/4",
+                    difficulty: "intermediate",
+                    description: "Caribbean calypso rhythm.",
+                    genre: "Calypso, Caribbean"
+                },
+                
+                // ADVANCED PATTERNS ⭐
+                {
                     name: "Muted Funk",
                     pattern: "D X D U X U D U",
                     timeSignature: "4/4",
@@ -3276,22 +3417,6 @@
                     genre: "Progressive Rock"
                 },
                 {
-                    name: "Waltz Up",
-                    pattern: "D U U D U U D U U",
-                    timeSignature: "3/4",
-                    difficulty: "intermediate",
-                    description: "Flowing waltz with upstrokes.",
-                    genre: "Folk, Country"
-                },
-                {
-                    name: "6/8 Folk",
-                    pattern: "D - - D - U D - - D - U",
-                    timeSignature: "6/8",
-                    difficulty: "intermediate",
-                    description: "Compound time folk pattern.",
-                    genre: "Folk, Celtic"
-                },
-                {
                     name: "Gallop",
                     pattern: "D D U D D U D D U D D U",
                     timeSignature: "4/4",
@@ -3299,22 +3424,9 @@
                     description: "Fast galloping rhythm pattern.",
                     genre: "Metal, Rock"
                 },
-                {
-                    name: "Calypso",
-                    pattern: "D - D U - U D -",
-                    timeSignature: "4/4",
-                    difficulty: "intermediate",
-                    description: "Caribbean calypso rhythm.",
-                    genre: "Calypso, Caribbean"
-                },
-				{
-					name: "Advanced 1",
-					pattern: "D - D - D U D U",
-					timeSignature: "4/4",
-					difficulty: "advanced",
-					description: "Popular patterns",
-					genre: "Popular Music"
-				}
+                
+                // 🎵 ADD YOUR NEW PATTERNS HERE! 🎵
+                // Just copy the template above and fill in your pattern details
             ];
             
             // --- DOM ELEMENTS ---
@@ -3328,6 +3440,12 @@
             const chordProgressGrid = document.getElementById('chord-progress-grid');
             const progressBarFill = document.getElementById('progress-bar-fill');
             const progressBarText = document.getElementById('progress-bar-text');
+            
+            // --- SEARCH ELEMENTS ---
+            const songSearch = document.getElementById('song-search');
+            const searchClear = document.getElementById('search-clear');
+            const searchResultsCount = document.getElementById('search-results-count');
+            const resultsText = document.getElementById('results-text');
             
             // --- PRACTICE TIMER ELEMENTS ---
             const timerDisplay = document.getElementById('timer-display');
@@ -3354,6 +3472,8 @@
             
             // --- PROGRESS TRACKING ---
             let learnedChords = new Set(); // Stores learned chord keys like "C-Major"
+            let allSongs = [...songData]; // Copy of original song data
+            let filteredSongs = [...songData]; // Currently displayed songs
             
             // --- TIMER STATE ---
             let timerInterval = null;
@@ -3708,6 +3828,141 @@
                         
                         fretboard.appendChild(bar);
                     }
+                });
+            }
+            
+            // --- SEARCH FUNCTIONS ---
+            function performSearch(searchTerm) {
+                const term = searchTerm.toLowerCase().trim();
+                
+                if (!term) {
+                    // If search is empty, show all songs
+                    filteredSongs = [...allSongs];
+                    updateSearchResults();
+                    renderSongs();
+                    return;
+                }
+                
+                // Search in title, artist, and chords
+                filteredSongs = allSongs.filter(song => {
+                    return song.title.toLowerCase().includes(term) ||
+                           song.artist.toLowerCase().includes(term) ||
+                           song.chords.some(chord => chord.toLowerCase().includes(term));
+                });
+                
+                updateSearchResults();
+                renderSongs();
+            }
+            
+            function updateSearchResults() {
+                const count = filteredSongs.length;
+                const total = allSongs.length;
+                
+                if (count === total) {
+                    resultsText.textContent = 'Showing all songs';
+                } else if (count === 1) {
+                    resultsText.textContent = '1 song found';
+                } else {
+                    resultsText.textContent = `${count} songs found`;
+                }
+                
+                // Show/hide clear button
+                if (songSearch.value.trim()) {
+                    searchClear.classList.add('visible');
+                } else {
+                    searchClear.classList.remove('visible');
+                }
+            }
+            
+            function clearSearch() {
+                songSearch.value = '';
+                filteredSongs = [...allSongs];
+                updateSearchResults();
+                renderSongs();
+                songSearch.focus();
+            }
+            
+            function renderSongs() {
+                songListContainer.innerHTML = '';
+                
+                if (filteredSongs.length === 0) {
+                    const noResults = document.createElement('div');
+                    noResults.className = 'song-card';
+                    noResults.style.textAlign = 'center';
+                    noResults.style.gridColumn = '1 / -1';
+                    noResults.innerHTML = `
+                        <h3>🔍 No songs found</h3>
+                        <p class="artist">Try searching for a different song, artist, or chord</p>
+                    `;
+                    songListContainer.appendChild(noResults);
+                    return;
+                }
+                
+                // Populate song cards with chord diagrams below each song
+                filteredSongs.forEach(song => {
+                    const card = document.createElement('div');
+                    card.className = 'song-card';
+                    card.innerHTML = `
+                        <h3>🎵 ${song.title}</h3>
+                        <p class="artist">🎤 ${song.artist}</p>
+                        <p class="chords">${song.chords.join(' - ')}</p>
+                    `;
+                    
+                    // Create collapsible chord section
+                    const chordSection = document.createElement('div');
+                    chordSection.className = 'chord-toggle-section';
+                    
+                    const toggleBtn = document.createElement('button');
+                    toggleBtn.className = 'chord-toggle-btn';
+                    toggleBtn.innerHTML = `
+                        🎸 Show Chord Diagrams
+                        <span class="arrow">▼</span>
+                    `;
+                    
+                    const chordDisplay = document.createElement('div');
+                    chordDisplay.className = 'song-chord-display';
+                    
+                    // Display all chords vertically in a single column
+                    song.chords.forEach(chordName => {
+                        let rootNote, chordType;
+                        if (chordName.endsWith('m')) {
+                            rootNote = chordName.slice(0, -1); // Remove 'm' suffix
+                            chordType = 'Minor';
+                        } else {
+                            rootNote = chordName;
+                            chordType = 'Major';
+                        }
+                        const chord = chordData[rootNote]?.[chordType];
+                        if (chord) {
+                            const diagram = createChordDiagram(rootNote, chordType, chord, true);
+                            chordDisplay.appendChild(diagram);
+                        }
+                    });
+                    
+                    // Toggle functionality
+                    toggleBtn.addEventListener('click', () => {
+                        const isExpanded = chordDisplay.classList.contains('expanded');
+                        if (isExpanded) {
+                            chordDisplay.classList.remove('expanded');
+                            toggleBtn.classList.remove('expanded');
+                            toggleBtn.innerHTML = `
+                                🎸 Show Chord Diagrams
+                                <span class="arrow">▼</span>
+                            `;
+                        } else {
+                            chordDisplay.classList.add('expanded');
+                            toggleBtn.classList.add('expanded');
+                            toggleBtn.innerHTML = `
+                                🙈 Hide Chord Diagrams
+                                <span class="arrow">▼</span>
+                            `;
+                        }
+                    });
+                    
+                    chordSection.appendChild(toggleBtn);
+                    chordSection.appendChild(chordDisplay);
+                    card.appendChild(chordSection);
+                    songListContainer.appendChild(card);
                 });
             }
             
@@ -4101,72 +4356,25 @@
             }
             // --- PAGE 2: SONGS PAGE ---
             function initSongsPage() {
-                // Populate song cards with chord diagrams below each song
-                songData.forEach(song => {
-                    const card = document.createElement('div');
-                    card.className = 'song-card';
-                    card.innerHTML = `
-                        <h3>🎵 ${song.title}</h3>
-                        <p class="artist">🎤 ${song.artist}</p>
-                        <p class="chords">${song.chords.join(' - ')}</p>
-                    `;
-                    
-                    // Create collapsible chord section
-                    const chordSection = document.createElement('div');
-                    chordSection.className = 'chord-toggle-section';
-                    
-                    const toggleBtn = document.createElement('button');
-                    toggleBtn.className = 'chord-toggle-btn';
-                    toggleBtn.innerHTML = `
-                        🎸 Show Chord Diagrams
-                        <span class="arrow">▼</span>
-                    `;
-                    
-                    const chordDisplay = document.createElement('div');
-                    chordDisplay.className = 'song-chord-display';
-                    
-                    // Display all chords vertically in a single column
-                    song.chords.forEach(chordName => {
-                        let rootNote, chordType;
-                        if (chordName.endsWith('m')) {
-                            rootNote = chordName.slice(0, -1); // Remove 'm' suffix
-                            chordType = 'Minor';
-                        } else {
-                            rootNote = chordName;
-                            chordType = 'Major';
-                        }
-                        const chord = chordData[rootNote]?.[chordType];
-                        if (chord) {
-                            const diagram = createChordDiagram(rootNote, chordType, chord, true);
-                            chordDisplay.appendChild(diagram);
-                        }
-                    });
-                    
-                    // Toggle functionality
-                    toggleBtn.addEventListener('click', () => {
-                        const isExpanded = chordDisplay.classList.contains('expanded');
-                        if (isExpanded) {
-                            chordDisplay.classList.remove('expanded');
-                            toggleBtn.classList.remove('expanded');
-                            toggleBtn.innerHTML = `
-                                🎸 Show Chord Diagrams
-                                <span class="arrow">▼</span>
-                            `;
-                        } else {
-                            chordDisplay.classList.add('expanded');
-                            toggleBtn.classList.add('expanded');
-                            toggleBtn.innerHTML = `
-                                🙈 Hide Chord Diagrams
-                                <span class="arrow">▼</span>
-                            `;
-                        }
-                    });
-                    
-                    chordSection.appendChild(toggleBtn);
-                    chordSection.appendChild(chordDisplay);
-                    card.appendChild(chordSection);
-                    songListContainer.appendChild(card);
+                // Initialize search functionality
+                songSearch.addEventListener('input', (e) => {
+                    performSearch(e.target.value);
                 });
+                
+                songSearch.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        performSearch(e.target.value);
+                    }
+                    if (e.key === 'Escape') {
+                        clearSearch();
+                    }
+                });
+                
+                searchClear.addEventListener('click', clearSearch);
+                
+                // Initial render
+                updateSearchResults();
+                renderSongs();
             }
             // --- PAGE 3: PROGRESS PAGE ---
             function initProgressPage() {
@@ -4560,6 +4768,12 @@
                 updateProgressStats();
                 updateProgressBar();
                 renderChordProgressGrid();
+                
+                // Re-render songs page
+                allSongs = [...songData];
+                filteredSongs = [...songData];
+                updateSearchResults();
+                renderSongs();
                 
                 console.log('All pages refreshed with new chord data!');
             };
